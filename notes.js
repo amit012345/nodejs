@@ -21,11 +21,16 @@ const addNote = (title, body) => {
 	//filter returns an array of duplicates
 	//for each note return true if the note already exists
 	const dups = notes.filter((note) => title === note.title )
+	//Duplicate notes are not to be added. Iterate over the array
+	//and return when the first duplicate is found
+	//dup = undefined if no duplicate is found
+	const dup = notes.find((note) => title === note.title )
+	console.log(chalk.blue('dup=' + dup))
 
 	/*
 	 * if dups is empty add the note otherwise ignore the note
 	 */
-	if (dups.length === 0) {
+	if (!dup) {
 		notes.push({
 			title: title,
 			body: body
