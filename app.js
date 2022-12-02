@@ -65,15 +65,27 @@ yargs.command({
 yargs.command({
 	command: 'list',
 	describe: 'List all notes',
+	builder: {
+		title: {
+			describe: 'Note title',
+			demandOption: true, //title is required
+			type: 'string' //without this, type will be boolean
+		}
+	},
 	handler: (argv) => notes.listNotes()
 })
-
-
 
 yargs.command({
 	command: 'read',
 	describe: 'Read a note',
-	handler: (argv) => notes.readNotes() 
+	builder: {
+		title: {
+			describe: 'Note title',
+			demandOption: true, //title is required
+			type: 'string' //without this, type will be boolean
+		}
+	},
+	handler: (argv) => notes.readNote(argv.title) 
 })
 
 yargs.parse()

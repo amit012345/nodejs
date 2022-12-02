@@ -1,10 +1,6 @@
 const chalk = require('chalk')
 const fs = require('fs')
 
-const getnotes = function() {
-	return 'Your notes....'
-}
-
 //typeof addNote is a function object
 //in JS, functions are first class objects
 const addNote = (title, body) => {
@@ -76,6 +72,22 @@ const list = () => {
 	notes.forEach((note) => console.log(note.title))
 }
 
+const read = (title) => {
+	//Read all the notes from a file
+	const notes = loadNotes()
+	//1.check if the note exists in the list
+	//2.if the note is found, display the title and the body
+	//3. otherwise print a note that the note was not found
+	note = notes.find((item) => title === item.title )	
+	if (note) {
+		console.log(chalk.blue(note.title))
+		console.log(chalk.white(note.body))
+	}
+	else {
+		console.log(chalk.red('Note not found\n'))
+	}
+}
+
 /******************Internal helper functions******************************/
 
 const loadNotes = function() {
@@ -110,5 +122,6 @@ const saveNotes = function(notes) {
  	// exported function:internal function
 	addNote: addNote,
 	removeNote: remove,
-	listNotes: list
+	listNotes: list,
+	readNote: read
 }
