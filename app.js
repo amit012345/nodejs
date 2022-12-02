@@ -45,20 +45,12 @@ yargs.command({
 			type: 'string' //without this, type will be boolean
 		}
 	},
-	handler: function(argv) {
-		notes.addNote(argv.title, argv.body)
-		//console.log('Title:' +  argv.title)
-		//console.log('Body:' +  argv.body)
-	}
+	handler: (argv) => notes.addNote(argv.title, argv.body)
 })
 
 yargs.command({
 	command: 'remove',
 	describe: 'Remove a new note',
-	handler: function(argv) {
-		notes.removeNote(argv.title)
-		//console.log('Removing a note')
-	},
 	builder: {
 		//--title
 		title: {
@@ -66,7 +58,8 @@ yargs.command({
 			demandOption: true, //title is required
 			type: 'string' //without this, type will be boolean
 		}
-	}
+	},
+	handler: (argv) => notes.removeNote(argv.title)
 })
 
 yargs.command({

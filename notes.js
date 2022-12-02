@@ -7,7 +7,7 @@ const getnotes = function() {
 
 //typeof addNote is a function object
 //in JS, functions are first class objects
-const addNote = function(title, body) {
+const addNote = (title, body) => {
 	/**
 	 * 1. if the notes file exists, then load it
 	 * 2 Otherwise create an empty file
@@ -19,10 +19,8 @@ const addNote = function(title, body) {
 	const notes = loadNotes()
 	//check if the note to be added already exists
 	//filter returns an array of duplicates
-	const dups = notes.filter(function(note) {
-		//for each note return true if the note already exists
-		return title === note.title 
-	})
+	//for each note return true if the note already exists
+	const dups = notes.filter((note) => title === note.title )
 
 	/*
 	 * if dups is empty add the note otherwise ignore the note
@@ -43,7 +41,7 @@ const addNote = function(title, body) {
 /**
  * Removes a note from the file if the note with the specified  title exists.
  */
-const remove = function(title) {
+const remove = (title) => {
 	console.log('Removing note ' + title + '\n')
 	const notes = loadNotes()
 
@@ -53,10 +51,8 @@ const remove = function(title) {
 	}
 	else {
 		//return an array of notes other than the notes to be removed
-		const dups = notes.filter(function(note) {
-			//add note to the list of notes to keep if the condition is true
-			return title !== note.title 
-		})
+		//add note to the list of notes to keep if the condition is true
+		const dups = notes.filter((note) => title !== note.title ) 
 		if (notes.length > dups.length) {
 			console.log(chalk.green.inverse('Note removed\n'))
 			saveNotes(dups)
