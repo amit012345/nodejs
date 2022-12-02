@@ -63,6 +63,14 @@ const remove = (title) => {
 	}
 }
 
+const list = () => {
+	//Read all the notes from a file
+	const notes = loadNotes()
+	//Display all the notes in the file
+	console.log(chalk.yellow('Your notes'))
+	notes.forEach((note) => console.log(note.title))
+}
+
 /******************Internal helper functions******************************/
 
 const loadNotes = function() {
@@ -93,8 +101,9 @@ const saveNotes = function(notes) {
 
 /*
  */
-module.exports = {
+	module.exports = {
  	// exported function:internal function
 	addNote: addNote,
-	removeNote: remove
+	removeNote: remove,
+	listNotes: list
 }
